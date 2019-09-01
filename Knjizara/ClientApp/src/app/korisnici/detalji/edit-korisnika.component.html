@@ -1,0 +1,107 @@
+<mat-toolbar style="margin-bottom:6%">
+  <span>Izmena podataka o korisniku : {{korisnickoIme}}</span>
+  <span style="flex: 1 1 auto"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="korisnikService.detaljiForm" class="normal-form" (submit)="onSubmit()" style="margin:0 auto">
+  <div class="row">
+    <div class="col-2 ml-5 mr-4">
+      <div class="controls-container">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ime</mat-label>
+          <input id="polje" formControlName="ime" matInput placeholder="Ime" required>
+          <mat-error>Neophodno je uneti ime</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Korisnicko ime</mat-label>
+          <input formControlName="korisnickoIme" matInput placeholder="Korisnicko ime" required>
+          <mat-error>Neophodno je uneti korisnicko ime</mat-error>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+    <div class="col-2 ml-4 mr-5">
+
+      <div class="controls-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Prezime</mat-label>
+          <input formControlName="prezime" matInput placeholder="Prezime" required>
+          <mat-error>Neophodno je uneti prezime</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Lozinka</mat-label>
+          <input formControlName="lozinka" type="text" matInput placeholder="Lozinka" required>
+          <mat-error>Neophodno je uneti lozinku</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-2 ml-5 mr-4">
+
+      <div class="controls-container">
+        <mat-form-field style="margin-bottom: 23.5px;">
+          <input formControlName="datumRodjenja" matInput [matDatepicker]="picker" placeholder="Datum rodjenja" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Telefon</mat-label>
+          <input formControlName="telefon" matInput placeholder="Telefon" required>
+          <mat-error>Neophodno je uneti broj telefona</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Rola</mat-label>
+          <mat-select formControlName="rolaId" [(value)]="selected" required>
+            <mat-option>--</mat-option>
+            <ng-container *ngFor="let rola of role">
+              <mat-option value="{{rola.rolaId}}">{{rola.naziv}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>Neophodno je izabrati rolu</mat-error>
+        </mat-form-field>
+
+      </div>
+    </div>
+
+    <div class="col-3 ml-4">
+
+      <div class="controls-container" style="margin-top: 25px;">
+        <mat-radio-group aria-label="Pol" formControlName="pol" style="margin-left:">
+          <mat-radio-button color="primary" value="Muski" class="mr-2">Muski</mat-radio-button>
+          <mat-radio-button color="primary" value="Zenski">Zenski</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field appearance="outline" style="margin-top: 32px">
+          <mat-label>Plata</mat-label>
+          <input formControlName="plata" matInput placeholder="Plata" required>
+          <mat-error>Neophodno je uneti platu</mat-error>
+        </mat-form-field>
+
+        <div class="example-button-row">
+          <button mat-raised-button color="primary" type="submit" style="top: 27px; left:128px">Potvrdi</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5 ml-5" style="top:-86px">
+
+      <mat-form-field appearance="outline" style="width:103%">
+        <mat-label>Mail</mat-label>
+        <input formControlName="mail" matInput placeholder="Mail" required>
+        <mat-error>Neophodno je uneti mail</mat-error>
+      </mat-form-field>
+
+    </div>
+  </div>
+</form>
+
+

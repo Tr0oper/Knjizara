@@ -1,0 +1,33 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 15px;
+  width: 100%;
+}
+
+.mat-elevation-z8 {
+  width: 100%;
+}
+
+th {
+  font-size: 15px;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #9d9d9d;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-container {
+  height: 200px;
+  overflow: auto;
+}
+
+.clock {
+  font-size: 2.5rem;
+}

@@ -1,0 +1,96 @@
+<form [formGroup]="proizvodService.detailForm" class="normal-form">
+    <div class="row">
+      <div class="col-2 table-responsive-sm table-responsive-md table-responsive-lg" style="margin-top:10px">
+
+        <br /><br />
+        <mat-form-field appearance="outline">
+          <mat-label>Proizvod Id</mat-label>
+          <input id="polje" formControlName="proizvodId" matInput readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Naziv</mat-label>
+          <input formControlName="naziv" id="polje" matInput readonly>
+        </mat-form-field>
+
+        <div class="example-button-row">
+          <a mat-raised-button color="warn" class="btn" [routerLink]="['/lista']">Vidi listu proizvoda</a>
+        </div>
+      </div>
+      <div class="col-10 table-responsive-sm table-responsive-md table-responsive-lg">
+
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pretraga">
+        </mat-form-field>
+
+        <div class="mat-elevation-z8 table-responsive-sm">
+
+
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-template [ngIf]="dataSource.data.length === 0">
+              <tr mat-footer-row *matFooterRowDef="['noRecord']"></tr>
+            </ng-template>
+            <ng-container matColumnDef="noRecord">
+              <td mat-footer-cell *matFooterCellDef colspan="8" style="text-align:center; font-style:italic">U bazi se trenutno ne nalazi nijedan proizvod ove vrste.</td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="barkod">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Barkod </th>
+              <td mat-cell *matCellDef="let vrsta"> {{vrsta.barkod}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="naziv">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Naziv </th>
+              <td mat-cell *matCellDef="let vrsta"> {{vrsta.naziv}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="cena">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cena </th>
+              <td mat-cell *matCellDef="let vrsta"> {{vrsta.cena | currency:' ':true:'1.2-2'}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="kolicina">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Kolicina </th>
+              <td mat-cell *matCellDef="let vrsta"> {{vrsta.kolicina}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="proizvodjac">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Proizvodjac </th>
+              <td mat-cell *matCellDef="let vrsta"> {{vrsta.proizvodjac}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="zemljaPorekla">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Zemlja porekla </th>
+              <td mat-cell *matCellDef="let vrsta"> {{vrsta.zemljaPorekla}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="proizvodId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Proizvod Id </th>
+              <td mat-cell *matCellDef="let vrsta"> {{vrsta.proizvodId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="opcije">
+              <th mat-header-cell *matHeaderCellDef>
+                <button mat-raised-button color="warn" [routerLink]='["/vrsteProizvoda"]'>Vrste proizvoda</button>
+              </th>
+              <td mat-cell *matCellDef="let vrsta">
+                <a (click)="delete(vrsta.barkod)" id="delete"><i class="material-icons">delete_forever</i></a>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+        </div>
+      </div>
+</form>

@@ -1,0 +1,46 @@
+<mat-toolbar style="margin-bottom:5%">
+  <span>Nova stavka racuna</span>
+  <button style="margin-left:58%" class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="service.stavkaForm" class="normal-form" (submit)="onSubmit(service.stavkaForm)">
+  <div class="row">
+    <div class="col">
+      <input type="hidden" formControlName="stavkaRacunaId" />
+
+      <mat-form-field appearance="outline" style="width:260px">
+        <mat-label>Kolicina</mat-label>
+        <input formControlName="kolicina" matInput placeholder="Unesite kolicinu" (keyup)="updateUkupno($event.target.value)" type="number">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width:260px">
+        <mat-label>Cena</mat-label>
+        <input formControlName="cenaPoJedinici" matInput type="number" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width:260px">
+        <mat-label>Sifra racuna</mat-label>
+        <input formControlName="sifraRacuna" matInput readonly>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline" style="width:260px">
+        <mat-label>Ukupno</mat-label>
+        <input formControlName="ukupno" matInput type="number">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width:260px">
+        <mat-label>Vrsta proizvoda</mat-label>
+        <mat-select formControlName="barkod" [(value)]="selected" (selectionChange)="updateCena($event)">
+          <mat-option>--</mat-option>
+          <ng-container *ngFor="let vrsta of vrste">
+            <mat-option value="{{vrsta.barkod}}">{{vrsta.naziv}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="example-button-row" style="margin-top:25px;">
+        <button mat-raised-button color="primary" type="submit">Potvrdi</button>
+      </div>
+    </div>
+  </div>
+</form>

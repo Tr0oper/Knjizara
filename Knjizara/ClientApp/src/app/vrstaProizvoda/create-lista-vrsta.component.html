@@ -1,0 +1,63 @@
+<mat-toolbar style="margin-bottom:5%">
+    <span>Nova vrsta proizvoda</span>
+    <span style="flex: 1 1 auto"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+  </mat-toolbar>
+  <form [formGroup]="service.createForm" class="normal-form" (submit)="onSubmit()">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width:260px">
+          <mat-label>Barkod</mat-label>
+          <input id="polje" formControlName="barkod" type="number" matInput placeholder="Unesite barkod vrste proizvoda">
+          <mat-error>Polje barkod je obavezno</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width:260px">
+          <mat-label>Naziv</mat-label>
+          <input formControlName="naziv" id="polje" matInput placeholder="Unesite naziv vrste proizvoda">
+          <mat-error>Polje naziv je obavezno</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width:260px">
+          <mat-label>Cena</mat-label>
+          <input formControlName="cena" matInput placeholder="Unesite cenu vrste proizvoda" type="number">
+          <mat-error>Polje cena je obavezno</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width:260px">
+          <mat-label>Kolicina</mat-label>
+          <input formControlName="kolicina" matInput placeholder="Unesite kolicinu vrste proizvoda" type="number">
+          <mat-error>Polje kolicina je obavezno</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width:260px">
+          <mat-label>Proizvodjac</mat-label>
+          <input formControlName="proizvodjac" matInput placeholder="Unesite naziv proizvodjaca vrste proizvoda">
+          <mat-error>Polje proizvodjac je obavezno</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width:260px">
+          <mat-label>Zemlja porekla</mat-label>
+          <input formControlName="zemljaPorekla" matInput placeholder="Unesite zemlju porekla vrste proizvoda">
+          <mat-error>Polje zemlja porekla je obavezno</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width:260px">
+          <mat-label>Grupa proizvoda</mat-label>
+          <mat-select formControlName="proizvodId">
+            <mat-option>--</mat-option>
+            <ng-container *ngFor="let proizvod of proizvodi">
+              <mat-option value="{{proizvod.proizvodId}}">{{proizvod.naziv}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>Neophodno je izabrati grupu proizvoda</mat-error>
+        </mat-form-field>
+
+        <div class="example-button-row" style="margin-top:115px;">
+          <button mat-raised-button color="primary" type="submit" [disabled]="service.createForm.invalid" style="width:260px">Potvrdi</button>
+        </div>
+      </div>
+    </div>
+  </form>

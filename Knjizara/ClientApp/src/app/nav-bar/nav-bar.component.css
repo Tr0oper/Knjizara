@@ -1,0 +1,58 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 225px;
+  overflow: auto;
+  position: fixed;
+  
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+#glavni{
+  color:whitesmoke;
+  text-decoration: none!important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.spacer{
+  flex: 1 1 auto;
+}
+
+@keyframes myAnimation {
+  0% {
+    opacity: 1;
+    transform: rotateX(90deg);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: rotateX(0deg);
+  }
+
+  100% {
+    display: none;
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
+}
+
+/*#dugme{
+  animation-name: myAnimation;
+  animation-duration: 1000ms;
+  animation-fill-mode:both;
+}*/

@@ -1,0 +1,111 @@
+
+#add {
+  font-weight: bold;
+}
+
+#add:hover {
+}
+
+.mat-form-field {
+  font-size: 15px;
+  width: 100%;
+}
+
+th{
+  font-size:16px;
+  width:200px;
+}
+
+td {
+  font-size: 14px;
+  width: 300px;
+}
+
+#info {
+  color: #16635c;
+}
+
+  #info:hover {
+    color: #0ba192;
+  }
+
+#delete {
+  color: #990909;
+}
+
+  #delete:hover {
+    color: #db0202;
+    cursor:pointer;
+  }
+
+i.material-icons {
+  font-size:25px;
+  margin-left: 2%;
+}
+
+.btn{
+  margin-left: 5px;
+}
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #9d9d9d;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.example-element-description {
+  display: flex;
+  flex-direction: column;
+}
+
+  .example-element-description > * {
+    width: 52%;
+  }
+
+#field{
+  width:200px;
+}
+
+

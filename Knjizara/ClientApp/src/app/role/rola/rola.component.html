@@ -1,0 +1,23 @@
+<div class="table-responsive-sm">
+  <mat-toolbar style="margin-bottom:5%">
+    <span>Nova rola</span>
+    <span style="flex: 1 1 auto"></span>
+    <button  class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+  </mat-toolbar>
+  <form [formGroup]="service.roleCreate" class="normal-form" (submit)="onSubmit()" align="center">
+    <div class="row">
+      <div class="col">
+        <div class="controls-container">
+          <mat-form-field appearance="outline" style="width:260px; margin: 0 auto">
+            <mat-label>Naziv</mat-label>
+            <input formControlName="naziv" id="polje" matInput placeholder="Unesite naziv role">
+            <mat-error>Neophodno je uneti naziv role</mat-error>
+          </mat-form-field>
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" type="submit" [disabled]="service.roleCreate.invalid" style="width:260px">Potvrdi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

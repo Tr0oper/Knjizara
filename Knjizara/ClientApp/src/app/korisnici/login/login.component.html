@@ -1,0 +1,35 @@
+<form [formGroup]="service.loginForm" class="normal-form" (submit)="onSubmit(service.loginForm)">
+
+  <div class="col-xs-12 col-sm-10 col-md-6" style="width:auto; margin:0 auto;">
+
+    <h3 style="text-align:center">Logovanje <i class="far fa-user-lock"></i></h3>
+    <br />
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8" style="margin:auto">
+        <mat-form-field appearance="outline" style="width:100%">
+          <mat-label>Korisnicko ime</mat-label>
+          <input formControlName="korisnickoIme" matInput placeholder="Korisnicko ime" required>
+          <mat-error>Neophodno je uneti korisnicko ime</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-xs-12 col-sm-10 col-md-8" style="margin:auto">
+        <mat-form-field appearance="outline" style="width:100%">
+          <mat-label>Lozinka</mat-label>
+          <input formControlName="lozinka" [type]="hide ? 'password' : 'text'" matInput placeholder="Lozinka" required>
+          <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </a>
+          <mat-error>Neophodno je uneti lozinku</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-sm-10 col-md-8" style="margin:auto">
+        <button type="submit" mat-raised-button color="primary" style="width:100%" [disabled]="!service.loginForm.valid">ULOGUJ SE</button>
+      </div>
+    </div>
+
+  </div>
+
+</form>

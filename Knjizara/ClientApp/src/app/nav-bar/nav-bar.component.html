@@ -1,0 +1,60 @@
+  <mat-sidenav-container fullscreen>
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'side' : 'push'"
+                 [opened]="(isHandset$ | async) === false">
+      <mat-toolbar>Menu <button mat-icon-button type="button" style="margin-left:60%" (click)="drawer.toggle()"><i class="fas fa-chevron-left fa-lg"></i></button></mat-toolbar>
+      <hr style="margin-top:-1px"/>
+      <mat-nav-list style="margin-top:-15px">
+        <a mat-list-item [matMenuTriggerFor]="meni"><i class="far fa-book fa-lg"></i><span style="margin-left:35%">Proizvodi</span></a>
+        <mat-menu #meni="matMenu">
+          <mat-nav-list>
+            <a mat-list-item [routerLink]='["/lista"]'><i class="material-icons">format_list_bulleted</i><span class="ml-3">Lista proizvoda</span></a>
+            <a mat-list-item [routerLink]='["/vrsteProizvoda"]'><i class="material-icons">format_list_numbered</i><span class="ml-3">Lista vrsta proizvoda</span></a>
+          </mat-nav-list>
+        </mat-menu>
+        <a mat-list-item [matMenuTriggerFor]="menu"><i class="far fa-wallet fa-lg"></i><span style="margin-left:33.7%">Racuni</span></a>
+        <mat-menu #menu="matMenu">
+          <mat-nav-list>
+            <a mat-list-item (click)="func()"><i class="far fa-credit-card fa-lg" style="margin-right:5px"></i><span class="ml-3">Nov racun</span></a>
+            <a mat-list-item [routerLink]='["/racuni"]'><i class="far fa-receipt fa-lg" style="margin-right:5px"></i><span class="ml-3"> Lista racuna</span></a>
+          </mat-nav-list>
+        </mat-menu>
+        <a mat-list-item [matMenuTriggerFor]="menuu"><i class="far fa-user-friends fa-lg"></i><span style="margin-left:30.9%">Korisnici</span></a>
+        <mat-menu #menuu="matMenu">
+          <mat-nav-list *ngIf="isRola()">
+            <a mat-list-item (click)="onCreate()"><i class="far fa-user-plus fa-lg"></i> <span class="ml-3">Nov korisnik</span></a>
+            <a mat-list-item [routerLink]='["/korisnici"]'><i class="far fa-list-alt fa-lg"></i><span class="ml-3">Lista korisnika</span></a>
+            <a mat-list-item [routerLink]='["/role"]'><i class="far fa-user-tag fa-lg"></i><span class="ml-3">Role</span></a>
+          </mat-nav-list>
+        </mat-menu>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      
+      <mat-toolbar color="primary">
+        <div *ngIf="!drawer.opened">
+          <button mat-icon-button type="button" id="dugme"
+                  (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+        <a mat-list-item [routerLink]='[""]' id="glavni" class="ml-3">Knjizara</a>
+        <span class="spacer"></span>
+        <span *ngIf="ulogovan()">
+          <button mat-button color="primary" (click)="odjava()" style="color:whitesmoke; font-size:16px">ODJAVI SE <i class="far fa-sign-out-alt fa-lg ml-1" style="margin-top:-4px"></i></button>
+        </span>
+        <span *ngIf="!ulogovan()">
+          <button mat-button color="primary" [routerLink]='["/login"]' style="color:whitesmoke; font-size:16px"><i class="far fa-sign-in-alt fa-lg mr-1" style="margin-top:-2px"></i> ULOGUJ SE</button>
+        </span>
+        
+
+      </mat-toolbar>
+      
+      <ng-content>
+
+      </ng-content>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>

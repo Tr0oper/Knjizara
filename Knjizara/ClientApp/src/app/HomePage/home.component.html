@@ -1,0 +1,156 @@
+<br /><br /><br /><br /><br />
+
+<div class="col-xs-auto col-sm-auto col-md-auto" style="margin:0 auto;" *ngIf="!isRadnik() && !isMenadzer()">
+  <div style=" text-align: center; border-radius: 7px; border: solid 2px">
+
+    <h3>Web aplikacija za pomoć u poslovanju knjižara</h3><br>
+    <p></p>
+    <h5 style="padding-bottom: 5px"><i class="far fa-copyright"></i> Autori: Pavle Lukić i Andreja Bićanin</h5>
+  </div>
+  </div>
+
+
+
+<div *ngIf="isMenadzer()" style="margin-top:-70px">
+  <div style="margin-bottom: 5%">
+    <h3 style="text-align:center">POSLOVNI PRIHODI</h3>
+  </div>
+  <div class="row">
+    <div class="col-2 table-responsive-sm table-responsive-md table-responsive-lg" style="right:5px; top:5px;">
+
+      <form [formGroup]="service.statistikaForm" class="normal-form">
+        <mat-form-field appearance="outline" style="width:110px; margin-top:50px">
+          <mat-label>Godina</mat-label>
+          <mat-select formControlName="godina">
+            <ng-container *ngFor="let godina of godine">
+              <mat-option value="{{godina}}" (click)="prosekZarade(godina)">{{godina}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <!--<mat-error>Neophodno je izabrati godinu</mat-error>-->
+        </mat-form-field>
+      </form>
+
+    </div>
+
+    <div class=" col-6 table-responsive-sm table-responsive-md table-responsive-lg">
+
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pretraga">
+      </mat-form-field>
+
+      <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+          <!-- Position Column -->
+          <ng-container matColumnDef="mesec">
+            <th mat-header-cell *matHeaderCellDef> Mesec </th>
+            <td mat-cell *matCellDef="let statistika"> {{statistika.mesec}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="zarada">
+            <th mat-header-cell *matHeaderCellDef> Zarada </th>
+            <td mat-cell *matCellDef="let statistika"> {{statistika.zarada | currency}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="col-4  table-responsive-sm table-responsive-md table-responsive-lg" style="margin-top:60px;">
+      <div class=" table-responsive-sm table-responsive-md table-responsive-lg" style=" text-align: center; border-radius: 7px; border: solid 2px; height:200px; border-color:red">
+        <h4 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; margin-top: 7px">UKUPNA GODISNJA ZARADA</h4>
+          <hr style="border-top: dashed 2px; height:1px; margin: 0 3%;" />
+            FINANSIJSKI IZVESTAJ <br /><br />
+
+        <table class="table table-bordered  table-responsive-sm table-responsive-md table-responsive-lg" style="width:94%; margin-left:3%">
+          <thead>
+            <tr>
+              <th scope="col">Godina</th>
+              <th scope="col">Zarada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{{godina}}</th>
+              <td scope="row" style="font-weight:bold">{{ukupnaZarada | currency}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isRadnik()">
+  <h3 style="margin-top:-100px; margin-bottom: 140px; text-align:center">PROMET NA DNEVNOM NIVOU</h3>
+  <div class="row" style="margin-top:-70px">
+
+    <div class=" col-6 table-responsive-sm table-responsive-md table-responsive-lg">
+
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pretraga">
+      </mat-form-field>
+
+      <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="sifraRacuna">
+            <th mat-header-cell *matHeaderCellDef> Sifra racuna </th>
+            <td mat-cell *matCellDef="let statistika"> {{statistika.sifraRacuna}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vremeIzdavanja">
+            <th mat-header-cell *matHeaderCellDef> Datum izdavanja </th>
+            <td mat-cell *matCellDef="let statistika"> {{statistika.vremeIzdavanja | date:'medium'}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="ukupanIznos">
+            <th mat-header-cell *matHeaderCellDef> Iznos </th>
+            <td mat-cell *matCellDef="let statistika"> {{statistika.ukupanIznos | currency}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="kolone; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: kolone;"></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-4  table-responsive-sm table-responsive-md table-responsive-lg" style="margin-top:60px;">
+      <div class=" table-responsive-sm table-responsive-md table-responsive-lg" style=" text-align: center; border-radius: 7px; border: solid 2px; height:200px; border-color:red">
+        <h4 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; margin-top: 7px">UKUPNA DNEVNA ZARADA</h4>
+        <hr style="border-top: dashed 2px; height:1px; margin: 0 3%;" />
+        DNEVNI PAZAR <br /><br />
+
+        <table class="table table-bordered  table-responsive-sm table-responsive-md table-responsive-lg" style="width:94%; margin-left:3%">
+          <thead>
+            <tr>
+              <th scope="col">Dan</th>
+              <th scope="col">Zarada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{{datum | date:'EEEE, dd MMMM yyyy'}}</th>
+              <td scope="row" style="font-weight:bold">{{pazar | currency}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="col-2 table-responsive-sm table-responsive-md table-responsive-lg" style="margin-top:120px;">
+      <div class="clock">
+        <span class="hour">{{ hours }}:</span>
+        <span class="min">{{ minutes }}:</span>
+        <span class="second">{{ seconds }}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="table-responsive-sm">
+<mat-toolbar style="margin-bottom:5%">
+  <span>Nova grupa proizvoda</span>
+  <button style="margin-left:34%" class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form [formGroup]="proizvodService.form" class="normal-form" (submit)="onSubmit()" align="center">
+  <div class="row">
+    <div class="col">
+      <div class="controls-container">
+        <mat-form-field appearance="outline" style="width:260px; margin: 0 auto">
+          <mat-label>Proizvod Id</mat-label>
+          <input id="polje" formControlName="proizvodId" type="number" matInput placeholder="Unesite Id grupe proizvoda">
+          <mat-error>Neophodno je uneti ID grupe proizvoda</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width:260px; margin: 0 auto">
+          <mat-label>Naziv</mat-label>
+          <input formControlName="naziv" id="polje" matInput placeholder="Unesite naziv grupe proizvoda">
+          <mat-error>Neophodno je uneti naziv grupe proizvoda</mat-error>
+        </mat-form-field>
+        <div class="example-button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="proizvodService.form.invalid" style="width:260px">Potvrdi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+  </div>
