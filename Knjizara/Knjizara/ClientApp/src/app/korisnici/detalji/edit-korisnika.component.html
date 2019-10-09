@@ -84,7 +84,7 @@
         </mat-form-field>
 
         <div class="example-button-row">
-          <button mat-raised-button color="primary" type="submit" style="top: 27px; left:128px">Potvrdi</button>
+          <button mat-raised-button type="submit" color="primary" style="top: 27px; background-color: #b71c1c; width:87%;" [disabled]="!korisnikService.detaljiForm.valid">Potvrdi</button>
         </div>
 
       </div>

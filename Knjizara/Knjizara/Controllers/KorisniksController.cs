@@ -50,6 +50,13 @@ namespace Knjizara.Controllers
             return korisnik;
         }
 
+        // GET: api/Korisniks/maxId
+        [HttpGet("max")]
+        public int MaxIdKorisnika()
+        {
+            return _unitOfWork.Korisnici.poslednjiId();
+        }
+
         // PUT: api/Korisniks/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutKorisnik(int id, Korisnik korisnik)
@@ -86,6 +93,7 @@ namespace Knjizara.Controllers
         [HttpPost]
         public async Task<ActionResult<Korisnik>> PostKorisnik(Korisnik korisnik)
         {
+            //var stariKorisnik = await _unitOfWork.Korisnici.logovanje(korisnik);
             if (KorisnikExists(korisnik.KorisnikId))
             {
                 return BadRequest();
@@ -94,6 +102,9 @@ namespace Knjizara.Controllers
             {
                 if ((DateTime.Now - korisnik.DatumRodjenja).TotalDays < 6570)
                     return BadRequest();
+
+                //if (korisnik.Mail == stariKorisnik.Mail || korisnik.KorisnickoIme == stariKorisnik.KorisnickoIme)
+                //    return BadRequest();
 
                 _unitOfWork.Korisnici.Add(korisnik);
                 await _unitOfWork.SaveChangesAsync();

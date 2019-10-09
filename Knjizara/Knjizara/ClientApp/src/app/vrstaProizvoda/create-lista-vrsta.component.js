@@ -26,7 +26,7 @@ var CreateListaVrstaComponent = /** @class */ (function () {
             .subscribe(function (data) {
             _this.toastr.success('Proizvod uspesno dodat', 'Knjizara');
             _this.service.createForm.reset();
-        }, function (error) { _this.toastr.warning('Doslo je do greske, proizovd sa unetim ID-em postoji u bazi', 'Knjizara'); });
+        }, function (error) { _this.toastr.error('Doslo je do greske, nije moguce dodati nov proizvod', 'Knjizara'); });
         this.onClose();
     };
     CreateListaVrstaComponent.prototype.onClose = function () {

@@ -29,12 +29,7 @@ export class RacunComponent implements OnInit {
 
   ) { }
 
-  stavke: StavkaRacuna[];
-
   ngOnInit() {
-
-      
-
     let sifraRacuna = this.router.snapshot.paramMap.get('sifraRacuna');
     if (sifraRacuna == null) {
       this.stavkaService.stavkaForm = new FormGroup({
@@ -67,6 +62,7 @@ export class RacunComponent implements OnInit {
     }
   }
 
+
   AddOrEdit(stavkaRacunaIndex, sifraRacuna) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -75,21 +71,15 @@ export class RacunComponent implements OnInit {
     dialogConfig.data = { stavkaRacunaIndex, sifraRacuna };
     this.dialog.open(StavkeRacunaComponent, dialogConfig).afterClosed().subscribe(res => {
       this.updateSume()
-      
     })
-
   }
 
-  suma: number
-
   updateSume() {
-    
-    this.service.detailForm.patchValue({ ukupanIznos: this.service.stavke.reduce((prev, curr) => { return prev + curr.ukupno }, 0) })
-
+    let pom = this.service.stavke.reduce((prev, curr) => { return prev + curr.ukupno }, 0)
+    this.service.detailForm.patchValue({ ukupanIznos: pom })
   }
 
   onDeleteStavkaRacuna(stavkaRacunaId: number, i: number) {
-
     this.stavkaService.getStavkePoBarkodu(this.service.stavke[i].sifraRacuna, this.service.stavke[i].barkod).subscribe(data => {
       this.stavkaService.deletetStavke(data.stavkaRacunaId).subscribe(x => {
         this.service.stavke.splice(i, 1);

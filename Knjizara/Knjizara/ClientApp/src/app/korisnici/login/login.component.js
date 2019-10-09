@@ -27,7 +27,7 @@ var LoginComponent = /** @class */ (function () {
             _this.toastr.success('Uspesno ste se ulogovali', 'Knjizara');
             _this.router.navigate(['/home']);
         }, function (error) {
-            _this.toastr.error('Uneto korisnicko ime ili lozinka su pogresni !', 'Knjizara');
+            _this.toastr.error('Uneto korisnicko ime ili lozinka su pogresni!', 'Knjizara');
         });
         this.service.loginForm.reset();
     };

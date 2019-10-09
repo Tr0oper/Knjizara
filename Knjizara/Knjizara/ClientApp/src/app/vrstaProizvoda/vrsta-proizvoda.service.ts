@@ -16,7 +16,7 @@ export class VrstaProizvodaService {
   constructor(private http: HttpClient) { }
 
   formUpdate: FormGroup = new FormGroup({
-    barkod: new FormControl(null),
+    barkod: new FormControl(''),
     naziv: new FormControl(''),
     cena: new FormControl(null),
     kolicina: new FormControl(null),
@@ -26,7 +26,7 @@ export class VrstaProizvodaService {
   });
 
   createForm: FormGroup = new FormGroup({
-    barkod: new FormControl(null, Validators.required),
+    barkod: new FormControl('', Validators.required),
     naziv: new FormControl('', Validators.required),
     cena: new FormControl(null, Validators.required),
     kolicina: new FormControl(null, Validators.required),

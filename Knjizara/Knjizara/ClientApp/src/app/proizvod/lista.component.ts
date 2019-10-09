@@ -23,24 +23,19 @@ import { CreateComponent } from './create.component';
     ]),
   ]
 })
+
 export class ListaComponent implements OnInit {
 
 
   displayedColumns: string[] = ['proizvodId', 'naziv', 'opcije'];
-  proizvodi: Proizvod[];
   dataSource: MatTableDataSource<Proizvod>;
   expandedElement: Proizvod | null;
-  proizvod: Proizvod;
-  lista: Proizvod[];
-  
 
   constructor(private service: ProizvodService,
     private toastr: ToastrService,
     private route: Router,
     private dialog: MatDialog
-  ) {
-    
-  }
+  ){}
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -54,9 +49,11 @@ export class ListaComponent implements OnInit {
 
   }
 
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
 
   delete(id: number) {
     this.service.deleteProizvoda(id)
@@ -68,7 +65,6 @@ export class ListaComponent implements OnInit {
             this.dataSource.sort = this.sort;
             this.dataSource.paginator = this.paginator;
             this.route.navigate(['/lista']);
-
           });
       },
         (error: any) => { this.toastr.warning('Doslo je do greske', 'Knjizara'); }
@@ -82,7 +78,6 @@ export class ListaComponent implements OnInit {
       this.toastr.error('Greska, polje za naziv mora biti popunjeno!', 'Knjizara');
     }
     else {
-      
       this.service.putProizvoda(this.service.formUpdate.value).subscribe(data => {
         this.toastr.success('Proizvod je uspesno izmenjen', 'Knjizara');
         this.service.getSvihProizvoda().subscribe(x => {
@@ -90,11 +85,11 @@ export class ListaComponent implements OnInit {
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
           this.service.formUpdate.reset();
-          
         });
       })
     }
   }
+
 
   onCreate() {
     const dialogConfig = new MatDialogConfig();
@@ -108,7 +103,6 @@ export class ListaComponent implements OnInit {
         this.dataSource = new MatTableDataSource(x)
         this.dataSource.paginator = this.paginator
         this.dataSource.sort = this.sort
-        this.route.navigate(['/lista'])
       })
     })
   }

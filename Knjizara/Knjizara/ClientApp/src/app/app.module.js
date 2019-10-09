@@ -22,7 +22,7 @@ var bottom_sheet_1 = require("@angular/material/bottom-sheet");
 var button_1 = require("@angular/material/button");
 var button_toggle_1 = require("@angular/material/button-toggle");
 var datepicker_1 = require("@angular/material/datepicker");
-var dialog_1 = require("@angular/material/dialog");
+var material_1 = require("@angular/material");
 var icon_1 = require("@angular/material/icon");
 var input_1 = require("@angular/material/input");
 var list_1 = require("@angular/material/list");
@@ -59,6 +59,10 @@ var racuni_service_1 = require("./racuni/racuni.service");
 var auth_interceptor_1 = require("./auth/auth.interceptor");
 var role_service_1 = require("./role/role.service");
 var statistika_service_1 = require("./HomePage/statistika.service");
+var create_component_1 = require("./proizvod/create.component");
+var korisnici_component_1 = require("./korisnici/korisnici.component");
+var edit_korisnika_component_1 = require("./korisnici/detalji/edit-korisnika.component");
+var godisnji_prikaz_component_1 = require("./UporedjivanjeStatistike/godisnji-prikaz.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -66,11 +70,18 @@ var AppModule = /** @class */ (function () {
         core_1.NgModule({
             declarations: [
                 app_component_1.AppComponent,
-                nav_bar_component_1.NavBarComponent
+                nav_bar_component_1.NavBarComponent,
+                godisnji_prikaz_component_1.GodisnjiPrikazComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
-                ngx_toastr_1.ToastrModule.forRoot(),
+                ngx_toastr_1.ToastrModule.forRoot({
+                    positionClass: "toast-bottom-right",
+                    closeButton: true,
+                    progressBar: true,
+                    progressAnimation: "increasing",
+                    timeOut: 2000
+                }),
                 racun_module_1.RacunModule,
                 korisnik_module_1.KorisnikModule,
                 proizvod_module_1.ProizvodModule,
@@ -83,7 +94,7 @@ var AppModule = /** @class */ (function () {
                 button_1.MatButtonModule,
                 button_toggle_1.MatButtonToggleModule,
                 datepicker_1.MatDatepickerModule,
-                dialog_1.MatDialogModule,
+                material_1.MatDialogModule,
                 input_1.MatInputModule,
                 list_1.MatListModule,
                 menu_1.MatMenuModule,
@@ -106,6 +117,7 @@ var AppModule = /** @class */ (function () {
                 http_1.HttpClientModule,
                 animations_1.BrowserAnimationsModule,
                 app_routing_module_1.AppRoutingModule,
+                material_1.MatTooltipModule,
                 layout_1.LayoutModule
             ],
             providers: [proizvod_service_1.ProizvodService, vrsta_proizvoda_service_1.VrstaProizvodaService, racun_service_1.RacunService, korisnici_service_1.KorisniciService, korisnik_service_1.KorisnikService, stavke_racuna_service_1.StavkeRacunaService, racuni_service_1.RacuniService, statistika_service_1.StatistikaService, role_service_1.RoleService,
@@ -113,10 +125,12 @@ var AppModule = /** @class */ (function () {
                     provide: http_1.HTTP_INTERCEPTORS,
                     useClass: auth_interceptor_1.AuthInterceptor,
                     multi: true
-                }
+                },
+                { provide: material_1.MatDialogRef, useValue: {} },
+                { provide: material_1.MAT_DIALOG_DATA, useValue: [] },
             ],
             bootstrap: [app_component_1.AppComponent],
-            entryComponents: [create_lista_vrsta_component_1.CreateListaVrstaComponent, stavke_racuna_component_1.StavkeRacunaComponent]
+            entryComponents: [create_lista_vrsta_component_1.CreateListaVrstaComponent, stavke_racuna_component_1.StavkeRacunaComponent, create_component_1.CreateComponent, korisnici_component_1.KorisniciComponent, edit_korisnika_component_1.EditKorisnikaComponent]
         })
     ], AppModule);
     return AppModule;

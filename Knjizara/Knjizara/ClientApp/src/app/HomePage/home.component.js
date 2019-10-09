@@ -8,35 +8,84 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var material_1 = require("@angular/material");
+var chart_js_1 = require("chart.js");
 var HomeComponent = /** @class */ (function () {
     function HomeComponent(service) {
         this.service = service;
         this.timerId = null;
         this.displayedColumns = ['mesec', 'zarada'];
         this.kolone = ['sifraRacuna', 'vremeIzdavanja', 'ukupanIznos'];
+        this.linijski = [];
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         if (this.isMenadzer()) {
-            this.service.getSvihGodinaRacuna().subscribe(function (data) {
+            this.service.getSvihGodinaIzdatihRacuna().subscribe(function (data) {
                 _this.godine = data;
                 _this.service.zaradaNaDnevnomNivou().subscribe(function (data) {
                     _this.datum = Date.now();
                     _this.pazar = data[0].zarada;
                 });
                 _this.service.dnevniRacuni().subscribe(function (data) {
-                    console.log(data);
                     _this.dataSource = new material_1.MatTableDataSource(data);
                 });
             });
         }
         if (this.isRadnik()) {
+            this.service.racuniSvakogSata().subscribe(function (data) {
+                var sati = data.map(function (s) { return s.sat; });
+                var zarada = data.map(function (z) { return z.zarada; });
+                _this.linijski = new chart_js_1.Chart('linijski', {
+                    type: 'line',
+                    data: {
+                        labels: sati,
+                        datasets: [
+                            {
+                                data: zarada,
+                                borderColor: '#b30404',
+                                fill: true,
+                                backgroundColor: 'rgba(32, 34, 38, 0.5)',
+                                pointRadius: 4,
+                                pointBackgroundColor: '#b30404',
+                                pointBorderColor: '#fff'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            xAxes: [{
+                                    display: true,
+                                    gridLines: {
+                                        display: true,
+                                        color: "#464d59"
+                                    },
+                                    ticks: {
+                                        fontColor: "#CCC",
+                                    },
+                                }],
+                            yAxes: [{
+                                    display: true,
+                                    gridLines: {
+                                        display: true,
+                                        color: "#464d59"
+                                    },
+                                    ticks: {
+                                        fontColor: "#CCC",
+                                    },
+                                }]
+                        }
+                    }
+                });
+            });
             this.service.zaradaNaDnevnomNivou().subscribe(function (data) {
                 _this.datum = Date.now();
                 _this.pazar = data[0].zarada;
             });
             this.service.dnevniRacuni().subscribe(function (data) {
-                console.log(data);
                 _this.dataSource = new material_1.MatTableDataSource(data);
             });
             this.setCurrentTime();
@@ -61,12 +110,59 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.prosekZarade = function (godina) {
         var _this = this;
         this.service.getZaradePoMesecimaZaGodinu(godina).subscribe(function (data) {
-            _this.dataSource = new material_1.MatTableDataSource(data);
             _this.godina = godina;
+            var meseci = data.map(function (r) { return r.mesec; });
+            var zarade = data.map(function (r) { return r.zarada; });
+            _this.chart = new chart_js_1.Chart('canvas', {
+                type: 'line',
+                data: {
+                    labels: meseci,
+                    datasets: [
+                        {
+                            data: zarade,
+                            borderColor: '#b30404',
+                            fill: true,
+                            backgroundColor: 'rgba(32, 34, 38, 0.5)',
+                            pointRadius: 4,
+                            pointBackgroundColor: '#b30404',
+                            pointBorderColor: '#fff'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        xAxes: [{
+                                display: true,
+                                gridLines: {
+                                    display: true,
+                                    color: "#464d59"
+                                },
+                                ticks: {
+                                    fontColor: "#CCC",
+                                },
+                            }],
+                        yAxes: [{
+                                display: true,
+                                gridLines: {
+                                    display: true,
+                                    color: "#464d59"
+                                },
+                                ticks: {
+                                    fontColor: "#CCC",
+                                },
+                            }]
+                    }
+                }
+            });
         });
         this.service.ukupnaZaradaIzabraneGodine(godina).subscribe(function (data) {
             _this.ukupnaZarada = data[0].ukupnaZarada;
         });
+        this.chart.destroy();
     };
     HomeComponent.prototype.applyFilter = function (filterValue) {
         this.dataSource.filter = filterValue.trim().toLowerCase();

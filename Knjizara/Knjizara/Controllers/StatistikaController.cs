@@ -55,5 +55,13 @@ namespace Knjizara.Controllers
             dan = DateTime.Now;
             return await _unitOfWork.Racuni.dnevniRacuni(dan);
         }
+
+        // GET: /api/Statistika/racuniSata
+        [HttpGet("racuniSata")]
+        public async Task<IEnumerable<Object>> ukupnaZaradaPoSatu(DateTime dan)
+        {
+            dan = DateTime.Now;
+            return await _unitOfWork.Racuni.racuniPoSatu(dan);
+        }
     }
 }

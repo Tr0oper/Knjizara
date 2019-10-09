@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { StatistikaService } from './statistika.service';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { Statistika } from '../Model/statistika.model';
-import { Racun } from '../Model/racun.model';
-import { AssertNotNull } from '@angular/compiler';
+import { MatTableDataSource, MatSort, MatDialogConfig } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog'
+import { Chart } from 'chart.js';
+import { GodisnjiPrikazComponent } from '../UporedjivanjeStatistike/godisnji-prikaz.component';
 
 type NewType = MatSort;
 
@@ -29,36 +29,94 @@ export class HomeComponent implements OnInit {
   dataSource: MatTableDataSource<any>
 
   kolone = ['sifraRacuna', 'vremeIzdavanja', 'ukupanIznos']
+
+  chart
+  linijski = [];
   
-  constructor(private service: StatistikaService) {
+  constructor(private service: StatistikaService,
+    ) {
     
   }
 
   ngOnInit() {
     if (this.isMenadzer()) {
-      this.service.getSvihGodinaRacuna().subscribe(data => {
+      this.service.getSvihGodinaIzdatihRacuna().subscribe(data => {
         this.godine = data
-
+        
         this.service.zaradaNaDnevnomNivou().subscribe(data => {
           this.datum = Date.now();
           this.pazar = data[0].zarada
         })
 
         this.service.dnevniRacuni().subscribe(data => {
-          console.log(data)
           this.dataSource = new MatTableDataSource(data)
         })
       })
+
     }
 
     if (this.isRadnik()) {
+      this.service.racuniSvakogSata().subscribe(data => {
+        let sati = data.map(s => s.sat)
+        let zarada = data.map(z => z.zarada)
+
+        this.linijski = new Chart('linijski', {
+          type: 'line',
+          data: {
+            labels: sati,
+            datasets: [
+              {
+                data: zarada,
+                borderColor: '#b30404',
+                fill: true,
+                backgroundColor: 'rgba(32, 34, 38, 0.5)',
+                pointRadius: 4,
+                pointBackgroundColor: '#b30404',
+                pointBorderColor: '#fff'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            legend: {
+              display: false
+            },
+            scales: {
+              xAxes: [{
+                display: true,
+                gridLines: {
+                  display: true,
+                  color: "#464d59"
+                },
+                ticks: {
+                  fontColor: "#CCC", // this here
+                },
+              }],
+              yAxes: [{
+                display: true,
+                gridLines: {
+                  display: true,
+                  color: "#464d59"
+                },
+                ticks: {
+                  fontColor: "#CCC", // this here
+                },
+              }]
+            }
+          }
+        })
+
+      })
+
+
+
+
       this.service.zaradaNaDnevnomNivou().subscribe(data => {
         this.datum = Date.now();
         this.pazar = data[0].zarada
       })
 
       this.service.dnevniRacuni().subscribe(data => {
-        console.log(data)
         this.dataSource = new MatTableDataSource(data)
       })
 
@@ -86,12 +144,61 @@ export class HomeComponent implements OnInit {
 
   prosekZarade(godina) {
     this.service.getZaradePoMesecimaZaGodinu(godina).subscribe(data => {
-      this.dataSource = new MatTableDataSource(data)
       this.godina = godina
+      let meseci = data.map(r => r.mesec)
+      let zarade = data.map(r => r.zarada)
+
+      this.chart = new Chart('canvas', {
+        type: 'line',
+        data: {
+          labels: meseci,
+          datasets: [
+            {
+              data: zarade,
+              borderColor: '#b30404',
+              fill: true,
+              backgroundColor: 'rgba(32, 34, 38, 0.5)' ,
+              pointRadius: 4,
+              pointBackgroundColor: '#b30404',
+              pointBorderColor: '#fff'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: true,
+              gridLines: {
+                display: true,
+                color: "#464d59"
+              },
+              ticks: {
+                fontColor: "#CCC", // this here
+              },
+            }],
+            yAxes: [{
+              display: true,
+              gridLines: {
+                display: true,
+                color: "#464d59"
+              },
+              ticks: {
+                fontColor: "#CCC", // this here
+              },
+            }]
+          }
+        }
+      })
+     
     })
     this.service.ukupnaZaradaIzabraneGodine(godina).subscribe(data => {
       this.ukupnaZarada = data[0].ukupnaZarada
     })
+    this.chart.destroy()
   }
 
   applyFilter(filterValue: string) {

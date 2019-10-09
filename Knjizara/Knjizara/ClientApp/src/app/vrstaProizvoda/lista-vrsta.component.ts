@@ -51,7 +51,6 @@ export class ListaVrstaComponent implements OnInit {
 
   constructor(private service: VrstaProizvodaService,
     private toastr: ToastrService,
-    private route: Router,
     private dialog: MatDialog
   ) { }
 
@@ -72,16 +71,14 @@ export class ListaVrstaComponent implements OnInit {
 
   delete(barkod: number) {
     this.service.deleteVrsta(barkod).subscribe(data => {
-      this.toastr.success('Vrsta proizvoda je uspesno obrisana', 'Knjizara');
+      this.toastr.error('Greska pri cuvanju izmena u bazi', 'Knjizara');
       this.service.getSvihVrsta().subscribe(x => {
         this.dataSource = new MatTableDataSource(x);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        this.route.navigate(['/vrsteProizvoda']);
-
       });
     },
-      (error: any) => { this.toastr.warning('Doslo je do greske', 'Knjizara'); }
+      (error: any) => { this.toastr.error('Doslo je do greske', 'Knjizara'); }
     );
   }
 
@@ -104,8 +101,10 @@ export class ListaVrstaComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.service.formUpdate.reset();
 
-        });
-      })
+        })
+      },
+        (error: any) => { this.toastr.error('Doslo je do greske, nije moguce sacuvati unete izmene', 'Knjizara') }
+      )
   }
 
   onCreate() {
@@ -119,7 +118,6 @@ export class ListaVrstaComponent implements OnInit {
         this.dataSource = new MatTableDataSource(x)
         this.dataSource.paginator = this.paginator
         this.dataSource.sort = this.sort
-        this.route.navigate(['/vrsteProizvoda'])
       });
     })
   }

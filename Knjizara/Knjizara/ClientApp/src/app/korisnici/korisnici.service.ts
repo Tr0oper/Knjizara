@@ -35,8 +35,6 @@ export class KorisniciService {
     return this.http.put<Korisnik>(this.url + '/api/Korisniks/' + id, korisnik, { headers: reqHeader })
   }
 
- 
-
   logovanje(formData) {
     return this.http.post(this.url + '/api/Korisniks/login', formData)
   }

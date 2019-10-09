@@ -55,6 +55,12 @@ namespace Knjizara.DAL.RepoPattern
 
         }
 
+        public void UpdateVrsteOnDelete(StavkaRacuna stavkaRacuna)
+        {
+            var staraVrsta = _context.VrsteProizvoda.Where(vp => vp.Barkod == stavkaRacuna.Barkod).FirstOrDefault();
+            staraVrsta.Kolicina += stavkaRacuna.Kolicina;
+        }
+
         public VrstaProizvoda getVrstePoBarkodu(int barkod)
         {
             var pom = _context.VrsteProizvoda.Where(vp => vp.Barkod == barkod).FirstOrDefault();

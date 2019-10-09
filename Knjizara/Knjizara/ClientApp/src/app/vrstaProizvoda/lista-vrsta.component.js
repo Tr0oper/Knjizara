@@ -27,10 +27,9 @@ var DialogContentExample = /** @class */ (function () {
 }());
 exports.DialogContentExample = DialogContentExample;
 var ListaVrstaComponent = /** @class */ (function () {
-    function ListaVrstaComponent(service, toastr, route, dialog) {
+    function ListaVrstaComponent(service, toastr, dialog) {
         this.service = service;
         this.toastr = toastr;
-        this.route = route;
         this.dialog = dialog;
         this.displayedColumns = ['barkod', 'naziv', 'cena', 'kolicina', 'proizvodjac', 'zemljaPorekla', 'proizvodId', 'opcije']; //'cena', 'kolicina', 'proizvodjac', 'zemljaPorekla', 'proizvodId',
     }
@@ -48,14 +47,13 @@ var ListaVrstaComponent = /** @class */ (function () {
     ListaVrstaComponent.prototype.delete = function (barkod) {
         var _this = this;
         this.service.deleteVrsta(barkod).subscribe(function (data) {
-            _this.toastr.success('Vrsta proizvoda je uspesno obrisana', 'Knjizara');
+            _this.toastr.error('Greska pri cuvanju izmena u bazi', 'Knjizara');
             _this.service.getSvihVrsta().subscribe(function (x) {
                 _this.dataSource = new table_1.MatTableDataSource(x);
                 _this.dataSource.sort = _this.sort;
                 _this.dataSource.paginator = _this.paginator;
-                _this.route.navigate(['/vrsteProizvoda']);
             });
-        }, function (error) { _this.toastr.warning('Doslo je do greske', 'Knjizara'); });
+        }, function (error) { _this.toastr.error('Doslo je do greske', 'Knjizara'); });
     };
     ListaVrstaComponent.prototype.onSubmit = function (vrsta) {
         var _this = this;
@@ -76,7 +74,7 @@ var ListaVrstaComponent = /** @class */ (function () {
                 _this.dataSource.paginator = _this.paginator;
                 _this.service.formUpdate.reset();
             });
-        });
+        }, function (error) { _this.toastr.error('Doslo je do greske, nije moguce sacuvati unete izmene', 'Knjizara'); });
     };
     ListaVrstaComponent.prototype.onCreate = function () {
         var _this = this;
@@ -90,7 +88,6 @@ var ListaVrstaComponent = /** @class */ (function () {
                 _this.dataSource = new table_1.MatTableDataSource(x);
                 _this.dataSource.paginator = _this.paginator;
                 _this.dataSource.sort = _this.sort;
-                _this.route.navigate(['/vrsteProizvoda']);
             });
         });
     };

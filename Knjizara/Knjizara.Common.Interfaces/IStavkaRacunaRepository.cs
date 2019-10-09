@@ -15,5 +15,6 @@ namespace Knjizara.Common.Interfaces
         VrstaProizvoda getVrstePoBarkodu(int barkod);
         Task<StavkaRacuna> getStavkeByBarkod(int SifraRacuna, int Barkod);
         Task<IEnumerable<int>> getSvihBarkodova(int sifraRacuna);
+        void UpdateVrsteOnDelete(StavkaRacuna stavkaRacuna);
     }
 }

@@ -77,7 +77,6 @@ var ListaComponent = /** @class */ (function () {
                 _this.dataSource = new table_1.MatTableDataSource(x);
                 _this.dataSource.paginator = _this.paginator;
                 _this.dataSource.sort = _this.sort;
-                _this.route.navigate(['/lista']);
             });
         });
     };

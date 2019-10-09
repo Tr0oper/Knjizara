@@ -9,5 +9,6 @@ namespace Knjizara.Common.Interfaces
     public interface IKorisnikRepository : IRepository<Korisnik>
     {
         Task<Korisnik> logovanje(Korisnik korisnik);
+        int poslednjiId();
     }
 }

@@ -28,5 +28,11 @@ namespace Knjizara.DAL.RepoPattern
         {
             return await _context.Korisnici.Where(k => string.Equals(k.KorisnickoIme, korisnik.KorisnickoIme, StringComparison.CurrentCulture) && string.Equals(k.Lozinka, korisnik.Lozinka, StringComparison.CurrentCulture)).FirstOrDefaultAsync();
         }
+
+        public int poslednjiId()
+        {
+            var korisnik = _context.Korisnici.Max(k => k.KorisnikId);
+            return korisnik;
+        }
     }
 }

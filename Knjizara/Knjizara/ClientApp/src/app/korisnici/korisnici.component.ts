@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { KorisniciService } from './korisnici.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
 import { Korisnik } from '../Model/korisnik.model';
 import { KorisnikService } from './korisnik/korisnik.service';
 import { KorisnikComponent } from './korisnik/korisnik.component';
 import { EditKorisnikaComponent } from './detalji/edit-korisnika.component';
+
 
 @Component({
   selector: 'app-korisnici',
@@ -21,13 +21,13 @@ export class KorisniciComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
+  role$: string[]
   korisnickoIme: string
 
   constructor(private service: KorisniciService,
-    private serviceKorisnika: KorisnikService,
+    private kSerivce: KorisnikService,
     private toastr: ToastrService,
-    private dialog: MatDialog,
-    private router: Router
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -36,6 +36,7 @@ export class KorisniciComponent implements OnInit {
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.paginator
     })
+    
   }
 
   applyFilter(filterValue: string) {
@@ -50,7 +51,6 @@ export class KorisniciComponent implements OnInit {
         this.dataSource = new MatTableDataSource(x)
         this.dataSource.sort = this.sort
         this.dataSource.paginator = this.paginator
-        this.router.navigate(['/korisnici'])
       })
     },
       (error: any) => { this.toastr.warning('Doslo je do greske', 'Knjizara'); }
@@ -69,7 +69,6 @@ export class KorisniciComponent implements OnInit {
         this.dataSource = new MatTableDataSource(x)
         this.dataSource.paginator = this.paginator
         this.dataSource.sort = this.sort
-        this.router.navigate(['/korisnici'])
       })
     })
   }
@@ -88,8 +87,6 @@ export class KorisniciComponent implements OnInit {
         this.dataSource.paginator = this.paginator
         this.dataSource.sort = this.sort
       })
-    })
-   
+    }) 
   }
-
 }

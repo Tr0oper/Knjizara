@@ -16,7 +16,7 @@ var StavkeRacunaService = /** @class */ (function () {
         this.url = 'https://localhost:44302';
         this.stavkaForm = new forms_1.FormGroup({
             stavkaRacunaId: new forms_1.FormControl(0),
-            sifraRacuna: new forms_1.FormControl(this.serviceRacun.detailForm.get('sifraRacuna').value),
+            sifraRacuna: new forms_1.FormControl(this.serviceRacun.detailForm.get('sifraRacuna')),
             kolicina: new forms_1.FormControl(0),
             cenaPoJedinici: new forms_1.FormControl(0),
             barkod: new forms_1.FormControl(0),

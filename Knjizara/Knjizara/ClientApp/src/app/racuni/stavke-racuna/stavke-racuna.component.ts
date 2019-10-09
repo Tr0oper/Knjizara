@@ -13,7 +13,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class StavkeRacunaComponent implements OnInit {
 
-
   vrste: VrsteProizvoda[];
   stavkaId: number;
   selected: string
@@ -32,6 +31,7 @@ export class StavkeRacunaComponent implements OnInit {
         this.selected = x.barkod.toString()
       })
     })
+
 
     if (this.data.stavkaRacunaIndex == null) {
       this.service.stavkaForm = new FormGroup({
@@ -53,7 +53,6 @@ export class StavkeRacunaComponent implements OnInit {
         cenaPoJedinici: stavka.cenaPoJedinici, barkod: stavka.barkod, naziv: stavka.naziv, ukupno: stavka.ukupno
       })
     }
-   
   }
 
   onSubmit(form: FormGroup) {
@@ -65,21 +64,23 @@ export class StavkeRacunaComponent implements OnInit {
         this.racunService.stavke.push(stavke)
 
         this.toastr.success('Stavka racuna je uspesno dodata', 'Knjizara');
+
         this.service.stavkaForm.reset();
       },
         (error: any) => { this.toastr.warning('Doslo je do greske', 'Knjizara') })
       this.onClose();
     }
     else {
-      
       this.service.getStavkePoBarkodu(this.service.stavkaForm.get('sifraRacuna').value, this.service.stavkaForm.get('barkod').value).subscribe(data => {
-        this.stavkaId = data.stavkaRacunaId
+        this.stavkaId = this.service.stavkaForm.get('stavkaRacunaId').value
+        console.log(data)
         this.service.putStavke(this.stavkaId, this.service.stavkaForm.value).subscribe(x => {
           this.toastr.success('Stavka racuna je uspesno izmenjena', 'Knjizara');
           this.racunService.stavke[this.data.stavkaRacunaIndex] = form.value;
         },
           (error: any) => {
             this.toastr.warning('Doslo je do greske', 'Knjizara')
+            
             return;
           })
       })
@@ -87,10 +88,12 @@ export class StavkeRacunaComponent implements OnInit {
     this.dialogRef.close();
   }
 
+
   onClose() {
     this.dialogRef.close()
     this.service.stavkaForm.reset();
   }
+
 
   updateCena(ctrl) {
     if (ctrl.value === undefined) {
@@ -106,6 +109,7 @@ export class StavkeRacunaComponent implements OnInit {
       })
     }
   }
+
 
   updateUkupno(ctrl) {
     this.service.getCenaByBarkod(this.service.stavkaForm.get('barkod').value).subscribe(r => {

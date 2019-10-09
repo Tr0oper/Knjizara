@@ -72,7 +72,7 @@
     <div class="col-3 ml-4">
 
       <div class="controls-container" style="margin-top: 25px;">
-        <mat-radio-group aria-label="Pol" formControlName="pol" style="margin-left:">
+        <mat-radio-group aria-label="Pol" formControlName="pol">
           <mat-radio-button color="primary" value="Muski" class="mr-2">Muski</mat-radio-button>
           <mat-radio-button color="primary" value="Zenski">Zenski</mat-radio-button>
         </mat-radio-group>
@@ -84,7 +84,7 @@
         </mat-form-field>
 
         <div class="example-button-row">
-          <button mat-raised-button color="primary" type="submit" style="top: 27px; left:128px" [disabled]="!service.korisnikForm.valid" >Potvrdi</button>
+          <button mat-raised-button color="primary" type="submit" style="top: 27px; background-color: #b71c1c; width:87%" [disabled]="!service.korisnikForm.valid">Potvrdi</button>
         </div>
 
       </div>
@@ -94,9 +94,9 @@
   <div class="row">
     <div class="col-5 ml-5" style="top:-86px">
 
-      <mat-form-field appearance="outline" style="width:103%">
+      <mat-form-field appearance="outline" style="width:104%">
         <mat-label>Mail</mat-label>
-        <input formControlName="mail" matInput placeholder="Mail" required>
+        <input formControlName="mail" matInput placeholder="Mail" type="email" required>
         <mat-error>Neophodno je uneti mail</mat-error>
       </mat-form-field>
 

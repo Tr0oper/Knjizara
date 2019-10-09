@@ -36,7 +36,7 @@ export class CreateListaVrstaComponent implements OnInit {
         this.service.createForm.reset();
 
       },
-        (error: any) => { this.toastr.warning('Doslo je do greske, proizovd sa unetim ID-em postoji u bazi', 'Knjizara') }
+        (error: any) => { this.toastr.error('Doslo je do greske, nije moguce dodati nov proizvod', 'Knjizara') }
     )
     this.onClose();
   }

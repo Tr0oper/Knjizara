@@ -18,6 +18,7 @@ var KorisnikComponent = /** @class */ (function () {
         this.service.getSvihRola().subscribe(function (data) {
             _this.role = data;
         });
+        this.service.getPoslednjiId().subscribe(function (x) { _this.id = x + 1; });
     };
     KorisnikComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -26,12 +27,12 @@ var KorisnikComponent = /** @class */ (function () {
         var datum = this.service.korisnikForm.get('datumRodjenja').value;
         datum.setDate(datum.getDate() + 1);
         this.service.korisnikForm.patchValue({ datumRodjenja: datum });
+        this.service.korisnikForm.patchValue({ korisnikId: this.id });
         this.service.postKorisnika(this.service.korisnikForm.value).subscribe(function (data) {
             _this.toastr.success('Korisnik ' + ime + ' je uspesno registrovan', 'Knjizara');
             _this.service.korisnikForm.reset();
-            _this.service.korisnikForm.patchValue({ korisnikId: 0 });
         }, function (error) {
-            _this.toastr.warning('Doslo je do greske', 'Knjizara');
+            _this.toastr.warning('Korisnik sa unetim mailom ili korisnickim imenom postoji u bazi', 'Knjizara');
             console.log(error);
         });
         this.onClose();

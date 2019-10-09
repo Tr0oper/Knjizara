@@ -25,6 +25,12 @@ var DnevniPazar = /** @class */ (function () {
     return DnevniPazar;
 }());
 exports.DnevniPazar = DnevniPazar;
+var ZaradaSata = /** @class */ (function () {
+    function ZaradaSata() {
+    }
+    return ZaradaSata;
+}());
+exports.ZaradaSata = ZaradaSata;
 var StatistikaService = /** @class */ (function () {
     function StatistikaService(http) {
         this.http = http;
@@ -39,6 +45,9 @@ var StatistikaService = /** @class */ (function () {
     StatistikaService.prototype.getSvihGodinaRacuna = function () {
         return this.http.get(this.url + '/api/Statistika');
     };
+    StatistikaService.prototype.getSvihGodinaIzdatihRacuna = function () {
+        return this.http.get(this.url + '/api/Statistika');
+    };
     StatistikaService.prototype.ukupnaZaradaIzabraneGodine = function (godina) {
         return this.http.get(this.url + '/api/Statistika/zarada/' + godina);
     };
@@ -47,6 +56,9 @@ var StatistikaService = /** @class */ (function () {
     };
     StatistikaService.prototype.dnevniRacuni = function () {
         return this.http.get(this.url + '/api/Statistika/racuni');
+    };
+    StatistikaService.prototype.racuniSvakogSata = function () {
+        return this.http.get(this.url + '/api/Statistika/racuniSata');
     };
     return StatistikaService;
 }());

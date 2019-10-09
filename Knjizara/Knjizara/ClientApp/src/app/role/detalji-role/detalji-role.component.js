@@ -40,7 +40,6 @@ var DetaljiRoleComponent = /** @class */ (function () {
                 _this.dataSource = new material_1.MatTableDataSource(x);
                 _this.dataSource.sort = _this.sort;
                 _this.dataSource.paginator = _this.paginator;
-                _this.router.navigate(['/detaljiRole/' + id]);
             }, function (err) { _this.toastr.error('Doslo je do greske!', 'Knjizara'); });
         });
     };

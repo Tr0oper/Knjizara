@@ -16,5 +16,6 @@ namespace Knjizara.Common.Interfaces
         object ukupnaZaradaZaGodinu(int godina);
         Task<IEnumerable<Object>> zaradaNaDnevnomNivou(DateTime dan);
         Task<IEnumerable<Racun>> dnevniRacuni(DateTime dan);
+        Task<IEnumerable<Object>> racuniPoSatu(DateTime dan);
     }
 }

@@ -94,5 +94,18 @@ namespace Knjizara.DAL.RepoPattern
                 
             return racuni;
         }
+
+        public async Task<IEnumerable<Object>> racuniPoSatu(DateTime dan)
+        {
+            var racuniDanas = await _context.Racuni.Where(r => r.VremeIzdavanja.Day == dan.Day && r.VremeIzdavanja.Month == dan.Month && r.VremeIzdavanja.Year == dan.Year)
+                .GroupBy(r => r.VremeIzdavanja.Hour)
+                .Select(g => new
+                {
+                    Sat = g.Select(x => x.VremeIzdavanja.Hour).Distinct(),
+                    Zarada = g.Sum(x => x.UkupanIznos)
+                }).ToListAsync();
+
+            return racuniDanas;
+        }
     }
 }

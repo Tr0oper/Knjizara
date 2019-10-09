@@ -17,6 +17,7 @@ import { AuthRolaGuard } from './auth/auth-rola.guard';
 import { RoleComponent } from './role/role.component';
 import { RolaComponent } from './role/rola/rola.component';
 import { DetaljiRoleComponent } from './role/detalji-role/detalji-role.component';
+import { GodisnjiPrikazComponent } from './UporedjivanjeStatistike/godisnji-prikaz.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'role', component: RoleComponent, canActivate: [AuthGuard, AuthRolaGuard] },
   { path: 'rola', component: RolaComponent, canActivate: [AuthGuard, AuthRolaGuard]  },
-  { path: 'detaljiRole/:rolaId', component: DetaljiRoleComponent, canActivate: [AuthGuard, AuthRolaGuard]  }
+  { path: 'detaljiRole/:rolaId', component: DetaljiRoleComponent, canActivate: [AuthGuard, AuthRolaGuard] },
+  { path: 'poredjenje/:godina', component: GodisnjiPrikazComponent, canActivate: [AuthGuard, AuthRolaGuard] }
 ];
 
 @NgModule({

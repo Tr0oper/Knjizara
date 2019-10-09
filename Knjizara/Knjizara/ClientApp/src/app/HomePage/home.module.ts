@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HomeComponent } from './home.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatToolbarModule, MatFormFieldModule } from '@angular/material';
+import { MatSelectModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatToolbarModule, MatFormFieldModule, MatIconModule, MatButtonModule, MatDialogModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -22,6 +23,10 @@ import { MatSelectModule, MatTableModule, MatPaginatorModule, MatSortModule, Mat
     MatSortModule,
     MatInputModule,
     MatSelectModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    RouterModule,
     MatTooltipModule
   ]
 })

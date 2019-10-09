@@ -68,7 +68,8 @@ var RacunComponent = /** @class */ (function () {
         });
     };
     RacunComponent.prototype.updateSume = function () {
-        this.service.detailForm.patchValue({ ukupanIznos: this.service.stavke.reduce(function (prev, curr) { return prev + curr.ukupno; }, 0) });
+        var pom = this.service.stavke.reduce(function (prev, curr) { return prev + curr.ukupno; }, 0);
+        this.service.detailForm.patchValue({ ukupanIznos: pom });
     };
     RacunComponent.prototype.onDeleteStavkaRacuna = function (stavkaRacunaId, i) {
         var _this = this;

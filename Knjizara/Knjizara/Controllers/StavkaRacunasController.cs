@@ -185,6 +185,7 @@ namespace Knjizara.Controllers
             }
 
             _unitOfWork.StavkeRacuna.UpdateCeneRacunaDeleteStavke(stavkaRacuna);
+            _unitOfWork.StavkeRacuna.UpdateVrsteOnDelete(stavkaRacuna);
             _unitOfWork.StavkeRacuna.Remove(stavkaRacuna);
             await _unitOfWork.SaveChangesAsync();
 

@@ -12,6 +12,7 @@ var tooltip_1 = require("@angular/material/tooltip");
 var home_component_1 = require("./home.component");
 var forms_1 = require("@angular/forms");
 var material_1 = require("@angular/material");
+var router_1 = require("@angular/router");
 var HomeModule = /** @class */ (function () {
     function HomeModule() {
     }
@@ -31,6 +32,10 @@ var HomeModule = /** @class */ (function () {
                 material_1.MatSortModule,
                 material_1.MatInputModule,
                 material_1.MatSelectModule,
+                material_1.MatIconModule,
+                material_1.MatButtonModule,
+                material_1.MatDialogModule,
+                router_1.RouterModule,
                 tooltip_1.MatTooltipModule
             ]
         })

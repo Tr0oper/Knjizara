@@ -25,6 +25,7 @@ var auth_rola_guard_1 = require("./auth/auth-rola.guard");
 var role_component_1 = require("./role/role.component");
 var rola_component_1 = require("./role/rola/rola.component");
 var detalji_role_component_1 = require("./role/detalji-role/detalji-role.component");
+var godisnji_prikaz_component_1 = require("./UporedjivanjeStatistike/godisnji-prikaz.component");
 var routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: home_component_1.HomeComponent },
@@ -46,7 +47,8 @@ var routes = [
     { path: 'login', component: login_component_1.LoginComponent },
     { path: 'role', component: role_component_1.RoleComponent, canActivate: [auth_guard_1.AuthGuard, auth_rola_guard_1.AuthRolaGuard] },
     { path: 'rola', component: rola_component_1.RolaComponent, canActivate: [auth_guard_1.AuthGuard, auth_rola_guard_1.AuthRolaGuard] },
-    { path: 'detaljiRole/:rolaId', component: detalji_role_component_1.DetaljiRoleComponent, canActivate: [auth_guard_1.AuthGuard, auth_rola_guard_1.AuthRolaGuard] }
+    { path: 'detaljiRole/:rolaId', component: detalji_role_component_1.DetaljiRoleComponent, canActivate: [auth_guard_1.AuthGuard, auth_rola_guard_1.AuthRolaGuard] },
+    { path: 'poredjenje/:godina', component: godisnji_prikaz_component_1.GodisnjiPrikazComponent, canActivate: [auth_guard_1.AuthGuard, auth_rola_guard_1.AuthRolaGuard] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

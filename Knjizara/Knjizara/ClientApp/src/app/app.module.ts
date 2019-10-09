@@ -14,7 +14,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA, MatTooltipModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -30,7 +30,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ToastrModule } from 'ngx-toastr';
-
 import { RolaModule } from './role/rola.module';
 
 import { ProizvodService } from './proizvod/proizvod.service';
@@ -53,15 +52,26 @@ import { RacuniService } from './racuni/racuni.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { RoleService } from './role/role.service';
 import { StatistikaService } from './HomePage/statistika.service';
+import { CreateComponent } from './proizvod/create.component';
+import { KorisniciComponent } from './korisnici/korisnici.component';
+import { EditKorisnikaComponent } from './korisnici/detalji/edit-korisnika.component';
+import { GodisnjiPrikazComponent } from './UporedjivanjeStatistike/godisnji-prikaz.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
+    GodisnjiPrikazComponent
   ],
   imports: [
     BrowserModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: "toast-bottom-right",
+      closeButton: true,
+      progressBar: true,
+      progressAnimation: "increasing",
+      timeOut: 2000
+    }),
     RacunModule,
     KorisnikModule,
     ProizvodModule,
@@ -97,6 +107,7 @@ import { StatistikaService } from './HomePage/statistika.service';
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    MatTooltipModule,
     LayoutModule
   ],
   providers: [ProizvodService, VrstaProizvodaService, RacunService, KorisniciService, KorisnikService, StavkeRacunaService, RacuniService, StatistikaService, RoleService,
@@ -104,10 +115,15 @@ import { StatistikaService } from './HomePage/statistika.service';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+   
+      { provide: MatDialogRef, useValue: {} },
+      { provide: MAT_DIALOG_DATA, useValue: [] },
+     
+    
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CreateListaVrstaComponent, StavkeRacunaComponent]
+  entryComponents: [CreateListaVrstaComponent, StavkeRacunaComponent, CreateComponent, KorisniciComponent, EditKorisnikaComponent]
 })
 export class AppModule { }
 

@@ -11,15 +11,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor(private service: KorisniciService, private router: Router, private toastr: ToastrService) { }
+  constructor(private service: KorisniciService,
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     if (sessionStorage.getItem('token') != null) {
       this.router.navigate(['/home'])
     }
   }
-
-
 
   onSubmit(form: FormGroup) {
     this.service.logovanje(form.value).subscribe((res: any) => {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home'])
     },
       (error: any) => {
-          this.toastr.error('Uneto korisnicko ime ili lozinka su pogresni !', 'Knjizara')
+          this.toastr.error('Uneto korisnicko ime ili lozinka su pogresni!', 'Knjizara')
       }
       
     )

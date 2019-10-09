@@ -57,7 +57,7 @@ namespace Knjizara.DAL.Context.Migrations
             migrationBuilder.Sql("insert into Role (Naziv) values (N'Menadzer'), (N'Radnik')");
 
             migrationBuilder.Sql("insert into Korisnici (KorisnickoIme, Mail, Ime, Prezime, Lozinka, DatumRodjenja, Pol, Telefon, Plata, RolaId)" +
-                                "values (N'Admin', N'admin@gmail.com', N'John', N'Doe', N'admin', '1981-06-05 22:00:00.0000000', N'Muski', N'0129876543', 120000, (select top 1 RolaID from Role))");
+                                "values (N'menadzer', N'menadzer@gmail.com', N'John', N'Doe', N'menadzer', '1981-06-05 22:00:00.0000000', N'Muski', N'0123456789', 120000, (select top 1 RolaID from Role))");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -19,6 +19,11 @@ export class DnevniPazar {
   zarada: number
 }
 
+export class ZaradaSata {
+  sat: number
+  zarada: number
+}
+
 
 export class StatistikaService {
 
@@ -34,7 +39,11 @@ export class StatistikaService {
     return this.http.get<any>(this.url + '/api/Statistika/' + goidna)
   }
 
-  getSvihGodinaRacuna(): Observable<number> {
+  getSvihGodinaRacuna(): Observable<number[]> {
+    return this.http.get<number[]>(this.url + '/api/Statistika')
+  }
+
+  getSvihGodinaIzdatihRacuna(): Observable<number> {
     return this.http.get<number>(this.url + '/api/Statistika')
   }
 
@@ -48,5 +57,9 @@ export class StatistikaService {
 
   dnevniRacuni(): Observable<Racun[]> {
     return this.http.get<Racun[]>(this.url + '/api/Statistika/racuni')
+  }
+
+  racuniSvakogSata(): Observable<ZaradaSata[]> {
+    return this.http.get<ZaradaSata[]>(this.url + '/api/Statistika/racuniSata')
   }
 }

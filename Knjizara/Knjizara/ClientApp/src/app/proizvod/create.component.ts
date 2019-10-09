@@ -19,10 +19,7 @@ export class CreateComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  proizvod: Proizvod;
-  lista: Proizvod[];
-
+  
   onSubmit() {
     this.proizvodService.postProizvoda(this.proizvodService.form.value)
       .subscribe(data => {

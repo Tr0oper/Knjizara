@@ -44,7 +44,6 @@ export class EditKorisnikaComponent implements OnInit {
       this.selected = data.rolaId.toString()
       this.korisnickoIme = data.korisnickoIme;
     })
-   
   }
 
   role: Rola[];
@@ -52,6 +51,11 @@ export class EditKorisnikaComponent implements OnInit {
   onSubmit() {
     let korisnikId = this.data.korisnikId
     let korisnickoIme = this.korisnikService.detaljiForm.get('korisnickoIme').value
+    
+    //let datum = this.korisnikService.detaljiForm.get('datumRodjenja').value
+    //datum.setDate(datum.getDate() + 1);
+    //this.korisnikService.detaljiForm.patchValue({ datumRodjenja: datum })
+
     this.service.putKorisnika(korisnikId, this.korisnikService.detaljiForm.value).subscribe(x => {
 
       this.toastr.success('Podaci o korisniku ' + korisnickoIme + ' su uspesno izmenjeni', 'Knjizara')

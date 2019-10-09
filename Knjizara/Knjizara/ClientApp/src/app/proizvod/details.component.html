@@ -82,7 +82,7 @@
                 <button mat-raised-button color="warn" [routerLink]='["/vrsteProizvoda"]'>Vrste proizvoda</button>
               </th>
               <td mat-cell *matCellDef="let vrsta">
-                <a (click)="delete(vrsta.barkod)" id="delete"><i class="material-icons">delete_forever</i></a>
+                <a (click)="delete(vrsta.barkod)" id="delete" class="btn btn-danger" style="font-size:12px; color:whitesmoke">OBRISI</a>
               </td>
             </ng-container>
 

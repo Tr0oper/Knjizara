@@ -16,7 +16,7 @@ var KorisnikService = /** @class */ (function () {
         this.korisnikForm = new forms_1.FormGroup({
             korisnikId: new forms_1.FormControl(0),
             korisnickoIme: new forms_1.FormControl('', forms_1.Validators.required),
-            mail: new forms_1.FormControl('', forms_1.Validators.required),
+            mail: new forms_1.FormControl('', forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
             ime: new forms_1.FormControl('', forms_1.Validators.required),
             prezime: new forms_1.FormControl('', forms_1.Validators.required),
             lozinka: new forms_1.FormControl('', forms_1.Validators.required),
@@ -29,7 +29,7 @@ var KorisnikService = /** @class */ (function () {
         this.detaljiForm = new forms_1.FormGroup({
             korisnikId: new forms_1.FormControl(0),
             korisnickoIme: new forms_1.FormControl('', forms_1.Validators.required),
-            mail: new forms_1.FormControl('', forms_1.Validators.required),
+            mail: new forms_1.FormControl('', forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
             ime: new forms_1.FormControl('', forms_1.Validators.required),
             prezime: new forms_1.FormControl('', forms_1.Validators.required),
             lozinka: new forms_1.FormControl('', forms_1.Validators.required),
@@ -46,6 +46,9 @@ var KorisnikService = /** @class */ (function () {
     KorisnikService.prototype.postKorisnika = function (korisnik) {
         var reqHeader = new http_1.HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json');
         return this.http.post(this.url + '/api/Korisniks', korisnik, { headers: reqHeader });
+    };
+    KorisnikService.prototype.getPoslednjiId = function () {
+        return this.http.get(this.url + '/api/Korisniks/max');
     };
     KorisnikService = __decorate([
         core_1.Injectable({

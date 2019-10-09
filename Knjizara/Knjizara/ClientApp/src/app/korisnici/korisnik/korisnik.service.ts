@@ -17,7 +17,7 @@ export class KorisnikService {
   korisnikForm: FormGroup = new FormGroup({
     korisnikId: new FormControl(0),
     korisnickoIme: new FormControl('', Validators.required),
-    mail: new FormControl('', Validators.required),
+    mail: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
     ime: new FormControl('', Validators.required),
     prezime: new FormControl('', Validators.required),
     lozinka: new FormControl('', Validators.required),
@@ -31,7 +31,7 @@ export class KorisnikService {
   detaljiForm: FormGroup = new FormGroup({
     korisnikId: new FormControl(0),
     korisnickoIme: new FormControl('', Validators.required),
-    mail: new FormControl('', Validators.required),
+    mail: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
     ime: new FormControl('', Validators.required),
     prezime: new FormControl('', Validators.required),
     lozinka: new FormControl('', Validators.required),
@@ -49,5 +49,10 @@ export class KorisnikService {
   postKorisnika(korisnik: Korisnik) {
     const reqHeader = new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json');
     return this.http.post(this.url + '/api/Korisniks', korisnik, { headers: reqHeader }
-    )}
+    )
+  }
+
+  getPoslednjiId(): Observable<number> {
+    return this.http.get<number>(this.url + '/api/Korisniks/max');
+  }
 }

@@ -1,0 +1,44 @@
+
+  <div style="text-align:center">
+    <div *ngIf="god != null">
+      <h3>
+        <a [routerLink]="['/home']" matTooltip="Nazad na pocetnu stranicu" style="float:left;"><i class="far fa-angle-double-left fa-lg" style="color:#b71c1c"></i></a>
+
+        Poredjenje zarade u {{god}} godini sa zaradom u {{manjeJedna}} godini
+
+      </h3>
+    </div>
+
+    <div *ngIf="god != null">
+      <form [formGroup]="service.statistikaForm" class="normal-form" style="float: right; margin-top: -55px">
+        <mat-form-field appearance="outline" style="width:110px; display:inline-block; position:absolute;">
+          <mat-label>Godina</mat-label>
+          <mat-select formControlName="godina">
+            <ng-container *ngFor="let god of godine">
+              <mat-option value="{{god}}" (click)="prosekZarade(god)">{{god}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <!--<mat-error>Neophodno je izabrati godinu</mat-error>-->
+        </mat-form-field>
+      </form>
+    </div>
+    <div *ngIf="god == null">
+      <form [formGroup]="service.statistikaForm" class="normal-form" style="float: right; margin-top: -15px">
+        <mat-form-field appearance="outline" style="width:110px; display:inline-block; position:absolute;">
+          <mat-label>Godina</mat-label>
+          <mat-select formControlName="godina">
+            <ng-container *ngFor="let god of godine">
+              <mat-option value="{{god}}" (click)="prosekZarade(god)">{{god}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <!--<mat-error>Neophodno je izabrati godinu</mat-error>-->
+        </mat-form-field>
+      </form>
+    </div>
+    
+
+    <br />
+
+    <canvas id="canvas" height="120">{{chart}}</canvas>
+
+  </div>

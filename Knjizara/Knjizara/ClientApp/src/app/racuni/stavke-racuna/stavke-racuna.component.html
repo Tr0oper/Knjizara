@@ -1,6 +1,7 @@
 <mat-toolbar style="margin-bottom:5%">
-  <span>Nova stavka racuna</span>
-  <button style="margin-left:58%" class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+  <span>Stavka racuna</span>
+  <span style="flex: 1 1 auto"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
 </mat-toolbar>
 <form [formGroup]="service.stavkaForm" class="normal-form" (submit)="onSubmit(service.stavkaForm)">
   <div class="row">
@@ -25,7 +26,7 @@
     <div class="col">
       <mat-form-field appearance="outline" style="width:260px">
         <mat-label>Ukupno</mat-label>
-        <input formControlName="ukupno" matInput type="number">
+        <input formControlName="ukupno" matInput readonly>
       </mat-form-field>
 
       <mat-form-field appearance="outline" style="width:260px">
@@ -39,7 +40,7 @@
       </mat-form-field>
 
       <div class="example-button-row" style="margin-top:25px;">
-        <button mat-raised-button color="primary" type="submit">Potvrdi</button>
+        <button mat-raised-button type="submit" color="warn" style=" width:260px">Potvrdi</button>
       </div>
     </div>
   </div>

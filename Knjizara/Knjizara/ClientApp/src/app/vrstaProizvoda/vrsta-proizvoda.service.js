@@ -14,7 +14,7 @@ var VrstaProizvodaService = /** @class */ (function () {
         this.http = http;
         this.url = 'https://localhost:44302';
         this.formUpdate = new forms_1.FormGroup({
-            barkod: new forms_1.FormControl(null),
+            barkod: new forms_1.FormControl(''),
             naziv: new forms_1.FormControl(''),
             cena: new forms_1.FormControl(null),
             kolicina: new forms_1.FormControl(null),
@@ -23,7 +23,7 @@ var VrstaProizvodaService = /** @class */ (function () {
             proizvodId: new forms_1.FormControl(null)
         });
         this.createForm = new forms_1.FormGroup({
-            barkod: new forms_1.FormControl(null, forms_1.Validators.required),
+            barkod: new forms_1.FormControl('', forms_1.Validators.required),
             naziv: new forms_1.FormControl('', forms_1.Validators.required),
             cena: new forms_1.FormControl(null, forms_1.Validators.required),
             kolicina: new forms_1.FormControl(null, forms_1.Validators.required),

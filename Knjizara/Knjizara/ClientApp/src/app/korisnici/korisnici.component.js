@@ -11,12 +11,11 @@ var material_1 = require("@angular/material");
 var korisnik_component_1 = require("./korisnik/korisnik.component");
 var edit_korisnika_component_1 = require("./detalji/edit-korisnika.component");
 var KorisniciComponent = /** @class */ (function () {
-    function KorisniciComponent(service, serviceKorisnika, toastr, dialog, router) {
+    function KorisniciComponent(service, kSerivce, toastr, dialog) {
         this.service = service;
-        this.serviceKorisnika = serviceKorisnika;
+        this.kSerivce = kSerivce;
         this.toastr = toastr;
         this.dialog = dialog;
-        this.router = router;
         this.displayedColumns = ['korisnikId', 'ime', 'prezime', 'korisnickoIme', 'mail', 'datumRodjenja', 'pol', 'telefon', 'plata', 'rolaId', 'opcije'];
     }
     KorisniciComponent.prototype.ngOnInit = function () {
@@ -39,7 +38,6 @@ var KorisniciComponent = /** @class */ (function () {
                 _this.dataSource = new material_1.MatTableDataSource(x);
                 _this.dataSource.sort = _this.sort;
                 _this.dataSource.paginator = _this.paginator;
-                _this.router.navigate(['/korisnici']);
             });
         }, function (error) { _this.toastr.warning('Doslo je do greske', 'Knjizara'); });
     };
@@ -56,7 +54,6 @@ var KorisniciComponent = /** @class */ (function () {
                 _this.dataSource = new material_1.MatTableDataSource(x);
                 _this.dataSource.paginator = _this.paginator;
                 _this.dataSource.sort = _this.sort;
-                _this.router.navigate(['/korisnici']);
             });
         });
     };

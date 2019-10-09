@@ -3,6 +3,7 @@ import { KorisnikService } from './korisnik.service';
 import { Rola } from '../../Model/rola.model';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-korisnik',
@@ -17,11 +18,12 @@ export class KorisnikComponent implements OnInit {
     private toastr: ToastrService,
     private dialogRef: MatDialogRef<KorisnikComponent>
   ) { }
-
+  id: number
   ngOnInit() {
     this.service.getSvihRola().subscribe(data => {
       this.role = data
     })
+    this.service.getPoslednjiId().subscribe(x => { this.id = x+1 })
   }
 
   onSubmit() {
@@ -32,19 +34,18 @@ export class KorisnikComponent implements OnInit {
     datum.setDate(datum.getDate() + 1);
     this.service.korisnikForm.patchValue({ datumRodjenja: datum })
 
+    this.service.korisnikForm.patchValue({ korisnikId: this.id })
+   
     this.service.postKorisnika(this.service.korisnikForm.value).subscribe(data => {
       this.toastr.success('Korisnik ' + ime + ' je uspesno registrovan', 'Knjizara')
       this.service.korisnikForm.reset();
-      this.service.korisnikForm.patchValue({ korisnikId: 0 })
     },
       (error: any) => {
-        this.toastr.warning('Doslo je do greske', 'Knjizara')
+        this.toastr.warning('Korisnik sa unetim mailom ili korisnickim imenom postoji u bazi', 'Knjizara')
         console.log(error)
       }
-
-      
-      
     )
+    
     this.onClose();
   }
 

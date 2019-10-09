@@ -61,7 +61,8 @@ var StavkeRacunaComponent = /** @class */ (function () {
         }
         else {
             this.service.getStavkePoBarkodu(this.service.stavkaForm.get('sifraRacuna').value, this.service.stavkaForm.get('barkod').value).subscribe(function (data) {
-                _this.stavkaId = data.stavkaRacunaId;
+                _this.stavkaId = _this.service.stavkaForm.get('stavkaRacunaId').value;
+                console.log(data);
                 _this.service.putStavke(_this.stavkaId, _this.service.stavkaForm.value).subscribe(function (x) {
                     _this.toastr.success('Stavka racuna je uspesno izmenjena', 'Knjizara');
                     _this.racunService.stavke[_this.data.stavkaRacunaIndex] = form.value;

@@ -47,6 +47,9 @@ var EditKorisnikaComponent = /** @class */ (function () {
         var _this = this;
         var korisnikId = this.data.korisnikId;
         var korisnickoIme = this.korisnikService.detaljiForm.get('korisnickoIme').value;
+        //let datum = this.korisnikService.detaljiForm.get('datumRodjenja').value
+        //datum.setDate(datum.getDate() + 1);
+        //this.korisnikService.detaljiForm.patchValue({ datumRodjenja: datum })
         this.service.putKorisnika(korisnikId, this.korisnikService.detaljiForm.value).subscribe(function (x) {
             _this.toastr.success('Podaci o korisniku ' + korisnickoIme + ' su uspesno izmenjeni', 'Knjizara');
             _this.router.navigate(['/korisnici']);

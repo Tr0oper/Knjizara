@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StavkaRacuna } from '../../Model/stavkaRacuna.model';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { VrsteProizvoda } from '../../Model/vrstaProizvoda.model';
 import { Observable } from 'rxjs';
 import { RacunService } from '../racun/racun.service';
@@ -15,7 +15,7 @@ export class StavkeRacunaService {
 
   stavkaForm: FormGroup = new FormGroup({
     stavkaRacunaId: new FormControl(0),
-    sifraRacuna: new FormControl(this.serviceRacun.detailForm.get('sifraRacuna').value),
+    sifraRacuna: new FormControl(this.serviceRacun.detailForm.get('sifraRacuna')),
     kolicina: new FormControl(0),
     cenaPoJedinici: new FormControl(0),
     barkod: new FormControl(0),

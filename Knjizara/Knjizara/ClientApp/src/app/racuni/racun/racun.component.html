@@ -3,26 +3,26 @@
     <mat-toolbar>
       <mat-form-field class="example-full-width" style="float:left;">
         <span matPrefix><i class="far fa-hashtag"></i></span>
-        <input matInput formControlName="sifraRacuna" style="color:#000000" readonly>
+        <input matInput formControlName="sifraRacuna" style="color:whitesmoke" readonly>
       </mat-form-field>
 
-      <span style="margin:0 auto; font-size:30px"><i class="fal fa-file-invoice-dollar fa-lg"></i> RACUN</span>
+      <span style="margin:0 auto; font-size:30px">RACUN</span>
 
       <mat-form-field class="example-full-width" style="float:right">
         <span matPrefix><i class="far fa-dollar-sign"></i></span>
-        <input matInput formControlName="ukupanIznos" style="color:#000000" format="currency" readonly>
+        <input matInput formControlName="ukupanIznos" style="color:whitesmoke" format="currency" readonly>
       </mat-form-field>
 
     </mat-toolbar>
 
     <div class="col-12 table-responsive-sm" style="margin-top:2%">
-      <table class="table table-borderless" id="tabelaStavki">
-        <thead class="thead-light">
+      <table class="table table-borderless" id="tabelaStavki" style="color:whitesmoke">
+        <thead style="background-color: #4f4f4f">
         <th>Proizvod</th>
         <th>Cena</th>
         <th>Kolicina</th>
         <th>Ukupno</th>
-        <th><button mat-raised-button color="primary" (click)="AddOrEdit(null, service.detailForm.sifraRacuna)"><i class="fa fa-plus"></i> Dodaj</button></th>
+        <th><button mat-raised-button (click)="AddOrEdit(null, service.detailForm.sifraRacuna)" style="width: 135px; background-color: #b71c1c"><i class="fa fa-plus"></i> Dodaj</button></th>
         </thead>
         <tbody>
           <tr *ngIf="service.stavke.length === 0">
@@ -36,14 +36,14 @@
             <td>{{stavka.kolicina}}</td>
             <td>{{stavka.ukupno | currency}}</td>
             <td>
-              <a (click)="AddOrEdit(i, service.detailForm.sifraRacuna)" id="editStavke"><i class="fas fa-edit fa-lg"></i></a>
-              <a (click)="onDeleteStavkaRacuna(stavka.stavkaRacunaId, i)" id="delete" style="margin-left:5px;"><i class="fas fa-trash-alt fa-lg"></i></a>
+              <a (click)="AddOrEdit(i, service.detailForm.sifraRacuna)" id="editStavke" class="btn btn-success" style="font-size:12px; color:whitesmoke">IZMENI</a>
+              <a (click)="onDeleteStavkaRacuna(stavka.stavkaRacunaId, i)" class="btn btn-danger" id="delete" style="margin-left:5px; font-size: 12px; color:whitesmoke">OBRISI</a>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <button mat-raised-button color="primary" (click)="redirectNaListu()"><i class="fas fa-check"></i> Potvrdi</button>
+  <button mat-raised-button (click)="redirectNaListu()" style="background-color: #b71c1c"><i class="fas fa-check"></i> Potvrdi</button>
   <button mat-raised-button color="warn" style="margin-left: 15px;" type="submit" (click)="print()"><i class="fal fa-print"></i> Stampaj</button>
 </form>

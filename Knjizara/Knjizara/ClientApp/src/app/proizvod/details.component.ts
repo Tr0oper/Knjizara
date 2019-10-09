@@ -25,11 +25,9 @@ export class DetailsComponent implements OnInit {
   ) { }
 
   displayedColumns: string[] = ['barkod', 'naziv', 'cena', 'kolicina', 'proizvodjac', 'zemljaPorekla', 'proizvodId', 'opcije']; //'cena', 'kolicina', 'proizvodjac', 'zemljaPorekla', 'proizvodId',
-  listaVrsta: VrsteProizvoda[];
+  
   dataSource: MatTableDataSource<VrsteProizvoda>;
-  vrsta: VrsteProizvoda;
-  lista: VrsteProizvoda[];
-
+  
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -43,7 +41,6 @@ export class DetailsComponent implements OnInit {
         this.dataSource.sort = this.sort
         this.dataSource.paginator = this.paginator;
       })
-     
     })
   }
 
@@ -61,9 +58,7 @@ export class DetailsComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.router.navigate(['/detalji/' + id])
       },
-
         (err: any) => { this.toastr.error('Doslo je do greske!', 'Knjizara') })
     })
   }
-
 }

@@ -50,7 +50,6 @@ export class DetaljiRoleComponent implements OnInit {
         this.dataSource = new MatTableDataSource(x)
         this.dataSource.sort = this.sort
         this.dataSource.paginator = this.paginator;
-        this.router.navigate(['/detaljiRole/' + id])
       },
 
         (err: any) => { this.toastr.error('Doslo je do greske!', 'Knjizara') })
